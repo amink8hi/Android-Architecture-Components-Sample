@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#243038</color>
+    <color name="colorPrimaryDark">#1A2428</color>
+    <color name="colorAccent">#FF6E00</color>
+    <color name="colorAccentSecondary">#CE742E</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black_transparent_icon">#8a000000</color>
+
+    <color name="color_material_white_background">#fafafa</color>
+    <color name="color_material_white_background_dark">#e8e8e8</color>
+    <color name="color_material_white_icon_deactivate">#909090</color>
+    <color name="color_material_white_icon_disabled">#f5f5f5</color>
+
+
+    <color name="number_button_background">#efeeef</color>
+    <color name="number_button_border">#d9d7d7</color>
+    <color name="divider">#cdcaca</color>
+    <color name="background">#F5F5F5</color>
+
+    <color name="toast_green">#72BA71</color>
+    <color name="toast_yellow">#F7A63E</color>
+    <color name="toast_red">#C74F5E</color>
+    <color name="toast_blue">#1E90FF</color>
+
+    <color name="btn_color">#5E3FFF</color>
+    <color name="btn_color_selected">#5137DB</color>
+    <color name="btn_color_disable">#6F6C7F</color>
+
+    <color name="bg_graph_color">#b1cffd</color>
+    <color name="bg_item_color">#303E44</color>
+</resources>
