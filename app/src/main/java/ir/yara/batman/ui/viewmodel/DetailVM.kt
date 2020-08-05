@@ -1,11 +1,12 @@
 package ir.yara.batman.ui.viewmodel
 
 import android.content.Context
-import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import dagger.hilt.android.qualifiers.ActivityContext
 import ir.yara.batman.R
@@ -41,33 +42,21 @@ class DetailVM @ViewModelInject constructor(
     var imdbID = MutableLiveData<String>()
 
 
-    init {
-        getDetail()
-    }
-
-
-    private fun getDetail() {
+    fun getDetail() {
         loading.value = true
         retry.value = false
 
-        imdbID.observe(
-            context as LifecycleOwner,
-            object : Observer<String?> {
-                override fun onChanged(imdbId: String?) {
-                    viewModelScope.launch() {
-                        try {
-                            val response =
-                                networkApi.GetDetail(imdbID = ApiConstants.DetailMovie + imdbId)
-                            handleDetail(response)
-                        } catch (t: Throwable) {
-                            KitLog.e(t)
-                            handleError(t)
-                        }
-                    }
+        viewModelScope.launch() {
+            try {
+                val response =
+                    networkApi.GetDetail(imdbID = ApiConstants.DetailMovie + imdbID.value)
+                handleDetail(response)
+            } catch (t: Throwable) {
+                KitLog.e(t)
+                handleError(t)
+            }
+        }
 
-                    imdbID.removeObserver(this)
-                }
-            })
 
     }
 
@@ -75,7 +64,7 @@ class DetailVM @ViewModelInject constructor(
         imdbID.value = id
     }
 
-    fun retry(view: View) {
+    fun retry() {
         getDetail()
 
     }

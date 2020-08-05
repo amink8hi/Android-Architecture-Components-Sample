@@ -2,7 +2,6 @@ package ir.yara.batman.ui.view.fragments
 
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.yara.batman.R
 import ir.yara.batman.databinding.FragmentDetailBinding
 import ir.yara.batman.ui.viewmodel.DetailVM
-import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -73,11 +71,13 @@ class DetailFragment : Fragment() {
 
                 }
             })
+
+        vm.getDetail()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        binding?.lifecycleOwner = null
+
     }
 }

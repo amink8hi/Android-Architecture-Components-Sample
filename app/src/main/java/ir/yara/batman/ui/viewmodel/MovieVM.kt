@@ -1,6 +1,5 @@
 package ir.yara.batman.ui.viewmodel
 
-import android.view.View
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -50,7 +49,7 @@ class MovieVM @ViewModelInject constructor(
     }
 
 
-    fun retry(view: View) {
+    fun retry() {
         getList()
     }
 
@@ -58,6 +57,7 @@ class MovieVM @ViewModelInject constructor(
     private fun handleList(baseResponse: MovieListModel, response: MutableList<SearchModel?>) {
         if (baseResponse.responses != "False") {
             try {
+                list.value?.clear()
                 list.value?.addAll(response)
                 update()
                 loading.value = false

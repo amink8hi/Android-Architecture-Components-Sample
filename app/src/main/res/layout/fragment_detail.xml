@@ -302,7 +302,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_48sdp"
-            android:onClick="@{(view) -> vm.retry(view)}"
+            android:onClick="@{() -> vm.retry()}"
             android:text="@string/retry"
             android:visibility="@{vm.retry ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"

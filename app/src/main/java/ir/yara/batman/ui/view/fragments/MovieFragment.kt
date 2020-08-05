@@ -51,7 +51,6 @@ class MovieFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        binding?.lifecycleOwner = null
         vm.adapter.value = null
     }
 
