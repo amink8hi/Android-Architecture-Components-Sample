@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import ir.yara.batman.R
 import ir.yara.batman.data.remote.responce.batmanlist.SearchModel
 import ir.yara.batman.databinding.ItemMovieBinding
@@ -38,6 +40,7 @@ class MovieAdapter(private val list: MutableList<SearchModel?>?) :
             .with(binding.root)
             .load(viewModel.movieListModel?.poster)
             .centerCrop()
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(12)))
             .placeholder(R.drawable.place_holder)
             .into(binding.img)
 
