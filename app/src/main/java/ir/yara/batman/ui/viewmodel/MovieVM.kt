@@ -27,10 +27,10 @@ class MovieVM @ViewModelInject constructor(
 
 
 
-    private fun update() {
-        adapter.value = MovieAdapter(list.value)
-        adapter.value?.notifyDataSetChanged()
-    }
+     fun update() {
+         adapter.value = MovieAdapter(list.value)
+         adapter.value?.notifyDataSetChanged()
+     }
 
     fun getList() {
         loading.value = true
@@ -57,7 +57,6 @@ class MovieVM @ViewModelInject constructor(
     private fun handleList(baseResponse: MovieListModel, response: MutableList<SearchModel?>) {
         if (baseResponse.responses != "False") {
             try {
-                list.value?.clear()
                 list.value?.addAll(response)
                 update()
                 loading.value = false

@@ -45,7 +45,12 @@ class MovieFragment : Fragment() {
         binding?.rvMovie?.setHasFixedSize(true)
         binding?.rvMovie?.itemAnimator = DefaultItemAnimator()
         binding?.rvMovie?.layoutManager = GridLayoutManager(context, 1)
-        vm.getList()
+
+        if (vm.list.value.isNullOrEmpty()) {
+            vm.getList()
+        } else {
+            vm.update()
+        }
     }
 
     override fun onDestroyView() {
