@@ -44,10 +44,8 @@ class MovieAdapter(private val list: MutableList<SearchModel?>?) :
             .placeholder(R.drawable.place_holder)
             .into(binding.img)
 
-        binding.title.text = viewModel.movieListModel?.title
+
         binding.title.isSelected = true
-        binding.type.text = viewModel.movieListModel?.type
-        binding.year.text = viewModel.movieListModel?.year
 
 
         val bundle = bundleOf(

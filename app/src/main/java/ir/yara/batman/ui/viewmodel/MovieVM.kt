@@ -63,10 +63,12 @@ class MovieVM @ViewModelInject constructor(
             } catch (e: Exception) {
                 KitLog.e(e)
                 retry.value = true
+                loading.value = false
             }
         } else {
             toast.errorToast(baseResponse.error)
             retry.value = true
+            loading.value = false
         }
 
     }
