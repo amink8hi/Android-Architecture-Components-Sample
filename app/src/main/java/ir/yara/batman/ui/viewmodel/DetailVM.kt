@@ -1,15 +1,10 @@
 package ir.yara.batman.ui.viewmodel
 
 import android.content.Context
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import dagger.hilt.android.qualifiers.ActivityContext
 import ir.yara.batman.R
 import ir.yara.batman.constants.ApiConstants
@@ -99,20 +94,6 @@ class DetailVM @ViewModelInject constructor(
         }
 
     }
-
-
-    companion object {
-        @JvmStatic
-        @BindingAdapter("imageUrl")
-        fun loadImage(view: ImageView, url: String) {
-            Glide.with(view.context)
-                .load(url)
-                .placeholder(R.drawable.place_holder)
-                .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
-                .into(view)
-        }
-    }
-
 
     private fun handleError(t: Throwable) {
         KitLog.e(t)
