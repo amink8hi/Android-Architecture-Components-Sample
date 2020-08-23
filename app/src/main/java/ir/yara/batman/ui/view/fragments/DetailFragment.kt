@@ -16,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.yara.batman.R
 import ir.yara.batman.databinding.FragmentDetailBinding
 import ir.yara.batman.ui.viewmodel.DetailVM
+import kotlinx.android.synthetic.main.fragment_detail.*
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -44,29 +45,18 @@ class DetailFragment : Fragment() {
 
         vm.getImdbID(requireArguments().getString("imdbID")!!)
 
-        //marquee
-        binding?.title?.isSelected = true
-        binding?.year?.isSelected = true
-        binding?.rated?.isSelected = true
-        binding?.released?.isSelected = true
-        binding?.runtime?.isSelected = true
-        binding?.genre?.isSelected = true
-        binding?.director?.isSelected = true
-
-
-
         vm.poster.observe(
             this as LifecycleOwner,
             object : Observer<String?> {
                 override fun onChanged(imageurl: String?) {
                     binding?.imageUrl = vm.poster.value
                     if (vm.poster.value?.length!! > 1) {
-                        binding?.img?.visibility = View.VISIBLE
-                        binding?.rating?.visibility = View.VISIBLE
+                        img.visibility = View.VISIBLE
+                        rating.visibility = View.VISIBLE
                         vm.poster.removeObserver(this)
                     } else {
-                        binding?.img?.visibility = View.GONE
-                        binding?.rating?.visibility = View.GONE
+                        img.visibility = View.GONE
+                        rating.visibility = View.GONE
                     }
 
                 }
@@ -75,9 +65,11 @@ class DetailFragment : Fragment() {
         vm.getDetail()
     }
 
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
 
     }
+
 }

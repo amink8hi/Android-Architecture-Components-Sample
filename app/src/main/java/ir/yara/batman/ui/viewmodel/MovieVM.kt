@@ -44,8 +44,6 @@ class MovieVM @ViewModelInject constructor(
                 handleError(t)
             }
         }
-
-
     }
 
 

@@ -90,7 +90,8 @@
             app:layout_constraintEnd_toStartOf="@id/img"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/img" />
+            app:layout_constraintTop_toTopOf="@id/img"
+            app:autoStartMarquee="@{true}" />
 
         <TextView
             android:id="@+id/year"
@@ -113,7 +114,8 @@
             app:layout_constraintEnd_toStartOf="@id/img"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:autoStartMarquee="@{true}" />
 
         <TextView
             android:id="@+id/rated"
@@ -136,7 +138,8 @@
             app:layout_constraintEnd_toStartOf="@id/img"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/year" />
+            app:layout_constraintTop_toBottomOf="@id/year"
+            app:autoStartMarquee="@{true}" />
 
         <TextView
             android:id="@+id/released"
@@ -159,7 +162,8 @@
             app:layout_constraintEnd_toStartOf="@id/img"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rated" />
+            app:layout_constraintTop_toBottomOf="@id/rated"
+            app:autoStartMarquee="@{true}" />
 
         <TextView
             android:id="@+id/runtime"
@@ -182,7 +186,8 @@
             app:layout_constraintEnd_toStartOf="@id/img"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/released" />
+            app:layout_constraintTop_toBottomOf="@id/released"
+            app:autoStartMarquee="@{true}" />
 
         <TextView
             android:id="@+id/genre"
@@ -205,7 +210,8 @@
             app:layout_constraintEnd_toStartOf="@id/img"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/runtime" />
+            app:layout_constraintTop_toBottomOf="@id/runtime"
+            app:autoStartMarquee="@{true}" />
 
         <TextView
             android:id="@+id/director"
@@ -228,7 +234,8 @@
             app:layout_constraintEnd_toStartOf="@id/img"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/genre" />
+            app:layout_constraintTop_toBottomOf="@id/genre"
+            app:autoStartMarquee="@{true}" />
 
         <View
             android:id="@+id/guideline"

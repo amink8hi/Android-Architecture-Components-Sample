@@ -1,11 +1,9 @@
 package ir.yara.batman.ui.viewmodel
 
-import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.qualifiers.ActivityContext
 import ir.yara.batman.R
 import ir.yara.batman.constants.ApiConstants
 import ir.yara.batman.data.remote.responce.detail.DetailListModel
@@ -18,8 +16,7 @@ import kotlinx.coroutines.launch
 
 class DetailVM @ViewModelInject constructor(
     private val networkApi: NetworkApi,
-    private val toast: KitToast,
-    @ActivityContext private val context: Context
+    private val toast: KitToast
 ) : ViewModel() {
 
     var title = MutableLiveData<String>().default("")
@@ -53,8 +50,6 @@ class DetailVM @ViewModelInject constructor(
                 handleError(t)
             }
         }
-
-
     }
 
     fun getImdbID(id: String) {
@@ -63,23 +58,22 @@ class DetailVM @ViewModelInject constructor(
 
     fun retry() {
         getDetail()
-
     }
 
     private fun handleDetail(response: DetailListModel) {
         if (response.responses != "False") {
             try {
-                title.value = "Title: " + response.Title
-                year.value = "Year: " + response.Year
-                rated.value = "Rated: " + response.Rated
-                released.value = "Released: " + response.Released
-                runtime.value = "Runtime: " + response.Runtime
-                genre.value = "Genre: " + response.Genre
-                director.value = "Director: " + response.Director
+                title.value = "Title: ".plus(response.Title)
+                year.value = "Year: ".plus(response.Year)
+                rated.value = "Rated: ".plus(response.Rated)
+                released.value = "Released: ".plus(response.Released)
+                runtime.value = "Runtime: ".plus(response.Runtime)
+                genre.value = "Genre: ".plus(response.Genre)
+                director.value = "Director: ".plus(response.Director)
                 rating.value = response.imdbRating
-                writer.value = "Wirters: " + response.Writer
-                actors.value = "Actors: " + response.Actors
-                plot.value = "Plot: " + response.Plot
+                writer.value = "Wirters: ".plus(response.Writer)
+                actors.value = "Actors: ".plus(response.Actors)
+                plot.value = "Plot: ".plus(response.Plot)
                 poster.value = response.Poster
                 loading.value = false
             } catch (e: Exception) {

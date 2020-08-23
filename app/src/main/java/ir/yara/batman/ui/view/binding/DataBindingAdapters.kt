@@ -1,6 +1,7 @@
 package ir.yara.batman.ui.view.binding
 
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import coil.api.load
 import coil.request.CachePolicy
@@ -25,4 +26,9 @@ fun bindImage(imageView: ImageView, url: String?) {
             scale(Scale.FIT)
         }
     }
+}
+
+@BindingAdapter("app:autoStartMarquee")
+fun setAutoStartMarquee(textView: TextView, autoStartMarquee: Boolean) {
+    textView.isSelected = autoStartMarquee
 }

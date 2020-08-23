@@ -16,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.yara.batman.R
 import ir.yara.batman.databinding.FragmentMovieBinding
 import ir.yara.batman.ui.viewmodel.MovieVM
+import kotlinx.android.synthetic.main.fragment_movie.*
 
 @AndroidEntryPoint
 class MovieFragment : Fragment() {
@@ -42,9 +43,9 @@ class MovieFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        binding?.rvMovie?.setHasFixedSize(true)
-        binding?.rvMovie?.itemAnimator = DefaultItemAnimator()
-        binding?.rvMovie?.layoutManager = GridLayoutManager(context, 1)
+        rv_movie.setHasFixedSize(true)
+        rv_movie.itemAnimator = DefaultItemAnimator()
+        rv_movie.layoutManager = GridLayoutManager(context, 1)
 
         if (vm.list.value.isNullOrEmpty()) {
             vm.getList()

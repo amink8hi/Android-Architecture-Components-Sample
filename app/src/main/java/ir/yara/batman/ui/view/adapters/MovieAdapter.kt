@@ -1,11 +1,11 @@
 package ir.yara.batman.ui.view.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import androidx.recyclerview.widget.RecyclerView
 import ir.yara.batman.R
 import ir.yara.batman.data.remote.responce.batmanlist.SearchModel
@@ -31,28 +31,43 @@ class MovieAdapter(private val list: MutableList<SearchModel?>?) :
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         binding = holder.itemMainReportsBinding
-        val viewModel = MovieItemVM(list!![position])
+        val viewModel = MovieItemVM(list!![position], binding.itemLayoutMovie)
         binding.vm = viewModel
-
-        //marquee
-        binding.title.isSelected = true
-
-
-        val bundle = bundleOf(
-            "imdbID" to viewModel.movieListModel?.imdbID
-        )
-        binding.itemLayoutMovie.setOnClickListener(View.OnClickListener {
-            it.findNavController().navigate(R.id.action_movieFragment_to_DetailFragment, bundle)
-        })
-
     }
 
     override fun getItemCount(): Int {
         return list?.size!!
     }
 
+    override fun onViewAttachedToWindow(holder: MainViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        holder.markAttach()
+    }
+
+    override fun onViewDetachedFromWindow(holder: MainViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        holder.markDetach()
+    }
 
     inner class MainViewHolder(var itemMainReportsBinding: ItemMovieBinding) :
-        RecyclerView.ViewHolder(itemMainReportsBinding.root)
+        RecyclerView.ViewHolder(itemMainReportsBinding.root), LifecycleOwner {
+        private val lifecycleRegistry = LifecycleRegistry(this)
+
+        init {
+            lifecycleRegistry.currentState = Lifecycle.State.INITIALIZED
+        }
+
+        override fun getLifecycle(): Lifecycle {
+            return lifecycleRegistry
+        }
+
+        fun markAttach() {
+            lifecycleRegistry.currentState = Lifecycle.State.STARTED
+        }
+
+        fun markDetach() {
+            lifecycleRegistry.currentState = Lifecycle.State.DESTROYED
+        }
+    }
 
 }
