@@ -1,6 +1,5 @@
 package ir.yara.batman.ui.base
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -13,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 
@@ -74,7 +72,7 @@ open class BaseActivity : AppCompatActivity() {
 
     private fun updateLanguagePreference(
         selectedLanguage: String?,
-        context: Activity
+        context: AppCompatActivity
     ) {
         val res = context.resources
         val dm = res.displayMetrics
