@@ -12,6 +12,7 @@ import ir.yara.batman.ui.view.adapters.MovieAdapter
 import ir.yara.batman.ui.view.customs.KitToast
 import ir.yara.batman.utils.KitLog
 import ir.yara.batman.utils.extension.default
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 
@@ -25,12 +26,10 @@ class MovieVM @ViewModelInject constructor(
     var loading = MutableLiveData<Boolean>().default(false)
     var retry = MutableLiveData<Boolean>().default(false)
 
-
-
-     fun update() {
-         adapter.value = MovieAdapter(list.value)
-         adapter.value?.notifyDataSetChanged()
-     }
+    fun update() {
+        adapter.value = MovieAdapter(list.value)
+        adapter.value?.notifyDataSetChanged()
+    }
 
     fun getList() {
         loading.value = true
@@ -78,4 +77,12 @@ class MovieVM @ViewModelInject constructor(
         retry.value = true
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+    }
+
+    fun clearCoroutine() {
+        viewModelScope.cancel()
+    }
 }

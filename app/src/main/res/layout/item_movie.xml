@@ -5,6 +5,10 @@
 
     <data>
 
+        <import
+            alias="View"
+            type="android.view.View" />
+
         <variable
             name="vm"
             type="ir.yara.batman.ui.viewmodel.MovieItemVM" />
@@ -15,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:onClick="@{() -> vm.onClickItem()}">
+        android:onClick="@{(view) -> vm.onClickItem(view)}">
 
         <View
             android:id="@+id/view"

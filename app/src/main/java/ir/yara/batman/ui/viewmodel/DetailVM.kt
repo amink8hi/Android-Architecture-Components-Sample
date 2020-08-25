@@ -11,6 +11,7 @@ import ir.yara.batman.network.api.NetworkApi
 import ir.yara.batman.ui.view.customs.KitToast
 import ir.yara.batman.utils.KitLog
 import ir.yara.batman.utils.extension.default
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 
@@ -96,4 +97,8 @@ class DetailVM @ViewModelInject constructor(
         retry.value = true
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+    }
 }

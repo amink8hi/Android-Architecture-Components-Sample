@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.view.activities.MovieActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

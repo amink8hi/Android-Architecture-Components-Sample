@@ -31,7 +31,7 @@ class MovieAdapter(private val list: MutableList<SearchModel?>?) :
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         binding = holder.itemMainReportsBinding
-        val viewModel = MovieItemVM(list!![position], binding.itemLayoutMovie)
+        val viewModel = MovieItemVM(list!![position])
         binding.vm = viewModel
     }
 
