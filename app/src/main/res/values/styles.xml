@@ -52,4 +52,9 @@
         <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
+    <style name="RootElement">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
 </resources>

@@ -1,4 +1,4 @@
-package ir.yara.batman.utils.extension
+package ir.yara.batman.utils.extensions
 
 import androidx.lifecycle.MutableLiveData
 

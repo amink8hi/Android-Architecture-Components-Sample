@@ -5,7 +5,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import ir.yara.batman.data.db.prefs.DataFile
 import ir.yara.batman.data.db.prefs.DataRepository
 
 @Module
@@ -17,8 +16,5 @@ class RepositoryModule {
         return DataRepository(application)
     }
 
-    @Provides
-    fun datafile(application: Application): DataFile {
-        return DataFile(application)
-    }
+
 }

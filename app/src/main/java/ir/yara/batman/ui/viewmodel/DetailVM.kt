@@ -4,20 +4,16 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ir.yara.batman.R
 import ir.yara.batman.constants.ApiConstants
 import ir.yara.batman.data.remote.responce.detail.DetailListModel
 import ir.yara.batman.network.api.NetworkApi
-import ir.yara.batman.ui.view.customs.KitToast
 import ir.yara.batman.utils.KitLog
-import ir.yara.batman.utils.extension.default
-import kotlinx.coroutines.cancel
+import ir.yara.batman.utils.extensions.default
 import kotlinx.coroutines.launch
 
 
 class DetailVM @ViewModelInject constructor(
-    private val networkApi: NetworkApi,
-    private val toast: KitToast
+    private val networkApi: NetworkApi
 ) : ViewModel() {
 
     var title = MutableLiveData<String>().default("")
@@ -36,12 +32,15 @@ class DetailVM @ViewModelInject constructor(
     var retry = MutableLiveData<Boolean>().default(false)
     var imdbID = MutableLiveData<String>()
 
+    fun getImdbID(id: String) {
+        imdbID.value = id
+    }
 
     fun getDetail() {
         loading.value = true
         retry.value = false
 
-        viewModelScope.launch() {
+        viewModelScope.launch {
             try {
                 val response =
                     networkApi.GetDetail(imdbID = ApiConstants.DetailMovie + imdbID.value)
@@ -53,9 +52,6 @@ class DetailVM @ViewModelInject constructor(
         }
     }
 
-    fun getImdbID(id: String) {
-        imdbID.value = id
-    }
 
     fun retry() {
         getDetail()
@@ -83,7 +79,7 @@ class DetailVM @ViewModelInject constructor(
                 loading.value = false
             }
         } else {
-            toast.errorToast(response.error)
+
             retry.value = true
             loading.value = false
         }
@@ -93,12 +89,8 @@ class DetailVM @ViewModelInject constructor(
     private fun handleError(t: Throwable) {
         KitLog.e(t)
         loading.value = false
-        toast.errorToast(id = R.string.error_in_connection)
         retry.value = true
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelScope.cancel()
-    }
+
 }

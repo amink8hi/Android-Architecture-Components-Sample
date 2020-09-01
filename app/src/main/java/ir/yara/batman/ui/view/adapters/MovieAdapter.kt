@@ -1,5 +1,6 @@
 package ir.yara.batman.ui.view.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -13,7 +14,7 @@ import ir.yara.batman.databinding.ItemMovieBinding
 import ir.yara.batman.ui.viewmodel.MovieItemVM
 
 
-class MovieAdapter(private val list: MutableList<SearchModel?>?) :
+class MovieAdapter(private val list: MutableList<SearchModel?>?, private val context: Context) :
     RecyclerView.Adapter<MovieAdapter.MainViewHolder>() {
 
     private lateinit var binding: ItemMovieBinding
@@ -31,7 +32,7 @@ class MovieAdapter(private val list: MutableList<SearchModel?>?) :
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         binding = holder.itemMainReportsBinding
-        val viewModel = MovieItemVM(list!![position])
+        val viewModel = MovieItemVM(list!![position], context)
         binding.vm = viewModel
     }
 

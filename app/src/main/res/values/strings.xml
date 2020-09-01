@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">batman</string>
     <string name="movie">Movie</string>
+    <string name="detail">Detail</string>
 
     <string name="error_in_connection">Connection Faild</string>
     <string name="retry">retry</string>
