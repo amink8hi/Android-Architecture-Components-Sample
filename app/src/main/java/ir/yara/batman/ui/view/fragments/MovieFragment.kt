@@ -16,13 +16,11 @@ import ir.yara.batman.ui.view.adapters.MovieAdapter
 import ir.yara.batman.ui.viewmodel.MovieVM
 import ir.yara.batman.utils.extensions.autoCleared
 import kotlinx.android.synthetic.main.fragment_movie.*
-import javax.inject.Singleton
 
 
 @AndroidEntryPoint
 class MovieFragment : BaseFragment() {
 
-    @Singleton
     private val movieViewModel by viewModels<MovieVM>() {
         defaultViewModelProviderFactory
     }

@@ -13,12 +13,10 @@ import ir.yara.batman.databinding.FragmentDetailBinding
 import ir.yara.batman.ui.base.BaseFragment
 import ir.yara.batman.ui.viewmodel.DetailVM
 import ir.yara.batman.utils.extensions.autoCleared
-import javax.inject.Singleton
 
 @AndroidEntryPoint
 class DetailFragment : BaseFragment() {
 
-    @Singleton
     private val detailViewModel by viewModels<DetailVM>() {
         defaultViewModelProviderFactory
     }
