@@ -18,8 +18,7 @@
         android:id="@+id/item_layout_movie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="@{(view) -> vm.onClickItem(view)}">
+        android:layout_marginTop="8dp">
 
         <View
             android:id="@+id/view"

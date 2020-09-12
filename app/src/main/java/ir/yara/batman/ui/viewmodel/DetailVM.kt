@@ -1,7 +1,9 @@
 package ir.yara.batman.ui.viewmodel
 
+import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ir.yara.batman.constants.ApiConstants
@@ -13,7 +15,8 @@ import kotlinx.coroutines.launch
 
 
 class DetailVM @ViewModelInject constructor(
-    private val networkApi: NetworkApi
+    private val networkApi: NetworkApi,
+    @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     var title = MutableLiveData<String>().default("")

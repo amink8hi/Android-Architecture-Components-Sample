@@ -13,12 +13,16 @@ import ir.yara.batman.databinding.FragmentDetailBinding
 import ir.yara.batman.ui.base.BaseFragment
 import ir.yara.batman.ui.viewmodel.DetailVM
 import ir.yara.batman.utils.extensions.autoCleared
+import javax.inject.Singleton
 
 @AndroidEntryPoint
 class DetailFragment : BaseFragment() {
 
-    private val vm by viewModels<DetailVM>()
-    var binding by autoCleared<FragmentDetailBinding>()
+    @Singleton
+    private val detailViewModel by viewModels<DetailVM>() {
+        defaultViewModelProviderFactory
+    }
+    private var binding by autoCleared<FragmentDetailBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +36,7 @@ class DetailFragment : BaseFragment() {
             false
         )
 
+
         binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
@@ -40,11 +45,12 @@ class DetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.vm = vm
+        binding.vm = detailViewModel
+
         arguments?.let {
-            vm.getImdbID(it.getString("imdbID")!!)
+            detailViewModel.getImdbID(it.getString("imdbID")!!)
         }
-        vm.getDetail()
+        detailViewModel.getDetail()
 
     }
 

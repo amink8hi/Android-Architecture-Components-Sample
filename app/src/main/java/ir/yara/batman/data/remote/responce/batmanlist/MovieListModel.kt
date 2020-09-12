@@ -5,7 +5,7 @@ import android.os.Parcelable
 import ir.yara.batman.data.remote.BaseResponse
 
 data class MovieListModel(
-    var Search: MutableList<SearchModel?> = mutableListOf(),
+    var Search: MutableList<SearchModel> = mutableListOf(),
     var totalResults: String? = null,
     var response: String? = null
 

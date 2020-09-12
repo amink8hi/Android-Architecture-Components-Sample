@@ -40,8 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_48sdp"
-            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}"
-            app:adapter="@{vm.adapter}" />
+            android:visibility="@{vm.loading ? View.GONE : View.VISIBLE}" />
 
         <ProgressBar
             android:layout_width="wrap_content"

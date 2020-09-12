@@ -10,6 +10,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.File
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 
 @Module
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit
 class OkHttpClientModule {
 
     @Provides
+    @Singleton
     internal fun okHttpClient(
         application: Application,
         cache: Cache
@@ -50,11 +52,13 @@ class OkHttpClientModule {
     }
 
     @Provides
+    @Singleton
     fun cache(cacheFile: File): Cache {
         return Cache(cacheFile, 10.toLong() * 1024 * 1024) // 10 MB
     }
 
     @Provides
+    @Singleton
     fun file(application: Application): File {
         val file = File(application.cacheDir, "HttpCache")
         file.mkdirs()

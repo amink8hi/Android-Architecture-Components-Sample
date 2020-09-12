@@ -1,12 +1,13 @@
 package ir.yara.batman.ui.view.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import androidx.annotation.Nullable
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ir.yara.batman.R
 import ir.yara.batman.data.remote.responce.batmanlist.SearchModel
@@ -14,61 +15,76 @@ import ir.yara.batman.databinding.ItemMovieBinding
 import ir.yara.batman.ui.viewmodel.MovieItemVM
 
 
-class MovieAdapter(private val list: MutableList<SearchModel?>?, private val context: Context) :
-    RecyclerView.Adapter<MovieAdapter.MainViewHolder>() {
+class MovieAdapter(private val list: MutableList<SearchModel>) :
+    RecyclerView.Adapter<MovieAdapter.DataViewHolder>() {
 
-    private lateinit var binding: ItemMovieBinding
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        return MainViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.item_movie,
-                parent,
-                false
-            )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
+        val itemView: View = LayoutInflater.from(parent.context).inflate(
+            R.layout.item_movie,
+            FrameLayout(parent.context), false
         )
+        return DataViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        binding = holder.itemMainReportsBinding
-        val viewModel = MovieItemVM(list!![position], context)
-        binding.vm = viewModel
+    override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
+        val dataModel: SearchModel = list[position]
+        holder.setViewModel(MovieItemVM(dataModel))
+
+
+        val bundle = bundleOf("imdbID" to dataModel.imdbID)
+        holder.binding?.itemLayoutMovie?.setOnClickListener(View.OnClickListener {
+            it.findNavController()
+                .navigate(R.id.action_movieFragment_to_DetailFragment, bundle)
+        })
     }
 
     override fun getItemCount(): Int {
-        return list?.size!!
+        return list.size
     }
 
-    override fun onViewAttachedToWindow(holder: MainViewHolder) {
+    override fun onViewAttachedToWindow(holder: DataViewHolder) {
         super.onViewAttachedToWindow(holder)
-        holder.markAttach()
+        holder.bind()
     }
 
-    override fun onViewDetachedFromWindow(holder: MainViewHolder) {
+    override fun onViewDetachedFromWindow(holder: DataViewHolder) {
         super.onViewDetachedFromWindow(holder)
-        holder.markDetach()
+        holder.unbind()
     }
 
-    inner class MainViewHolder(var itemMainReportsBinding: ItemMovieBinding) :
-        RecyclerView.ViewHolder(itemMainReportsBinding.root), LifecycleOwner {
-        private val lifecycleRegistry = LifecycleRegistry(this)
+    fun updateData(@Nullable data: List<SearchModel>?) {
+        if (data.isNullOrEmpty()) {
+            this.list.addAll(data!!)
+        }
+        notifyDataSetChanged()
+    }
+
+    class DataViewHolder(itemView: View?) : RecyclerView.ViewHolder(
+        itemView!!
+    ) {
+
+        var binding: ItemMovieBinding? = null
+
+        fun bind() {
+            if (binding == null) {
+                binding = DataBindingUtil.bind(itemView)
+            }
+        }
+
+        fun unbind() {
+            binding?.unbind()
+        }
+
+        fun setViewModel(viewModel: MovieItemVM?) {
+            if (binding != null) {
+                binding!!.vm = viewModel
+            }
+        }
 
         init {
-            lifecycleRegistry.currentState = Lifecycle.State.INITIALIZED
-        }
-
-        override fun getLifecycle(): Lifecycle {
-            return lifecycleRegistry
-        }
-
-        fun markAttach() {
-            lifecycleRegistry.currentState = Lifecycle.State.STARTED
-        }
-
-        fun markDetach() {
-            lifecycleRegistry.currentState = Lifecycle.State.DESTROYED
+            bind()
         }
     }
+
 
 }

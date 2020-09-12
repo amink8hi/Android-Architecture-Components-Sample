@@ -11,6 +11,7 @@ import ir.yara.batman.network.api.NetworkApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 
 @Module(includes = [OkHttpClientModule::class])
@@ -20,12 +21,14 @@ class NetworkModule {
     private lateinit var api: NetworkApi
 
     @Provides
+    @Singleton
     fun networkApi(retrofit: Retrofit): NetworkApi {
         api = retrofit.create(NetworkApi::class.java)
         return retrofit.create(NetworkApi::class.java)
     }
 
     @Provides
+    @Singleton
     fun retrofit(
         okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
@@ -38,12 +41,14 @@ class NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun gson(): Gson {
         val gsonBuilder = GsonBuilder()
         return gsonBuilder.create()
     }
 
     @Provides
+    @Singleton
     fun gsonConverterFactory(gson: Gson): GsonConverterFactory {
         return GsonConverterFactory.create(gson)
     }
