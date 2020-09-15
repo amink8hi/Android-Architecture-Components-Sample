@@ -7,7 +7,8 @@ import android.widget.FrameLayout
 import androidx.annotation.Nullable
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ir.yara.batman.R
 import ir.yara.batman.data.remote.responce.batmanlist.SearchModel
@@ -15,7 +16,7 @@ import ir.yara.batman.databinding.ItemMovieBinding
 import ir.yara.batman.ui.viewmodel.MovieItemVM
 
 
-class MovieAdapter(private val list: MutableList<SearchModel>) :
+class MovieAdapter(private val list: MutableList<SearchModel>, private val fragment: Fragment?) :
     RecyclerView.Adapter<MovieAdapter.DataViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
@@ -33,8 +34,8 @@ class MovieAdapter(private val list: MutableList<SearchModel>) :
 
         val bundle = bundleOf("imdbID" to dataModel.imdbID)
         holder.binding?.itemLayoutMovie?.setOnClickListener(View.OnClickListener {
-            it.findNavController()
-                .navigate(R.id.action_movieFragment_to_DetailFragment, bundle)
+            fragment?.findNavController()
+                ?.navigate(R.id.action_movieFragment_to_DetailFragment, bundle)
         })
     }
 

@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.navGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
+import ir.yara.batman.BR
 import ir.yara.batman.R
 import ir.yara.batman.databinding.FragmentMovieBinding
 import ir.yara.batman.ui.base.BaseFragment
@@ -21,7 +23,8 @@ import kotlinx.android.synthetic.main.fragment_movie.*
 @AndroidEntryPoint
 class MovieFragment : BaseFragment() {
 
-    private val movieViewModel by viewModels<MovieVM>() {
+
+    private val vm by navGraphViewModels<MovieVM>(R.id.nav_graph) {
         defaultViewModelProviderFactory
     }
     private var binding by autoCleared<FragmentMovieBinding>()
@@ -31,42 +34,38 @@ class MovieFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate<FragmentMovieBinding>(
+    ): View? =
+        DataBindingUtil.inflate<FragmentMovieBinding>(
             inflater,
             R.layout.fragment_movie,
             container,
             false
-        )
+        ).also {
+            binding = it
+        }.root
 
-        binding.lifecycleOwner = viewLifecycleOwner
-
-        return binding.root
-    }
-
+    @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.vm = movieViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.setVariable(BR.vm, vm)
 
         initRecyclerView(binding.rvMovie)
 
-        movieViewModel.list.observeForever {
-            adapter.value = MovieAdapter(movieViewModel.list.value!!)
+        vm.list.observe(viewLifecycleOwner) {
+            adapter.value = MovieAdapter(vm.list.value!!, parentFragment)
             adapter.value!!.updateData(it)
             binding.rvMovie.adapter = adapter.value
             adapter.value?.notifyDataSetChanged()
 
         }
 
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        adapter.value = null
         rv_movie.adapter = null
-
+        adapter.value = null
+        vm.clear()
     }
-
-
 }

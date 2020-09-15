@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import
+            alias="View"
+            type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="ir.yara.batman.ui.viewmodel.LoginVM" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_120sdp"
+            android:src="@drawable/ic_app"
+            app:layout_constraintBottom_toTopOf="@id/edt_layout_username"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ir.yara.batman.ui.view.customs.CustomTextInputLayout
+            android:id="@+id/edt_layout_username"
+            style="@style/TextInputEditText"
+            android:layout_width="@dimen/_264sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
+            app:endIconDrawable="@drawable/ic_person_outline"
+            app:endIconMode="clear_text"
+            app:layout_constraintBottom_toTopOf="@id/edt_layout_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <ir.yara.batman.ui.view.customs.CustomEditText
+                style="@style/DarkEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone_number"
+                android:inputType="number"
+                android:textColor="@color/white"
+                app:drawableRightCompat="@drawable/ic_person_outline" />
+        </ir.yara.batman.ui.view.customs.CustomTextInputLayout>
+
+        <ir.yara.batman.ui.view.customs.CustomTextInputLayout
+            android:id="@+id/edt_layout_password"
+            style="@style/TextInputEditText"
+            android:layout_width="@dimen/_264sdp"
+            android:layout_height="wrap_content"
+            app:endIconMode="password_toggle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edt_layout_username">
+
+            <ir.yara.batman.ui.view.customs.CustomEditText
+                style="@style/DarkEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:hint="@string/password"
+                android:inputType="numberPassword"
+                android:textColor="@color/white" />
+        </ir.yara.batman.ui.view.customs.CustomTextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/appCompatButton"
+            style="@style/BtnStyle"
+            android:layout_width="@dimen/_264sdp"
+            android:layout_height="@dimen/_37sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:background="@drawable/bg_btn_orange"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:onClick="@{(view) -> vm.goToMovieFrag(view)}"
+            android:text="@string/confirm"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

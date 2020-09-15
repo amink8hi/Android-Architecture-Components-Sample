@@ -5,7 +5,9 @@
 
     <string name="error_in_connection">Connection Faild</string>
     <string name="retry">retry</string>
-
+    <string name="phone_number">Phone number</string>
+    <string name="password">Password</string>
+    <string name="confirm">confirm</string>
 
 
 </resources>

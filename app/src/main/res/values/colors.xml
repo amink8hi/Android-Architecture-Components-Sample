@@ -13,7 +13,7 @@
     <color name="color_material_white_background_dark">#e8e8e8</color>
     <color name="color_material_white_icon_deactivate">#909090</color>
     <color name="color_material_white_icon_disabled">#f5f5f5</color>
-
+    <color name="mtrl_textinput_default_box_stroke_color">#ffffff</color>
 
     <color name="number_button_background">#efeeef</color>
     <color name="number_button_border">#d9d7d7</color>

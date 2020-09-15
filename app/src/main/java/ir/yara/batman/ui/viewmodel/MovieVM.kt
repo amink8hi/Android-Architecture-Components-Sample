@@ -74,4 +74,9 @@ class MovieVM @ViewModelInject constructor(
         retry.value = true
     }
 
+    fun clear() = onCleared()
+
+    override fun onCleared() {
+
+    }
 }

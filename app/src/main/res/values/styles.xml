@@ -15,7 +15,14 @@
     </style>
 
 
-    <style name="TextInputLayout" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense" />
+    <style name="TextInputEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="endIconTint">@color/white</item>
+        <item name="boxStrokeColor">@color/colorAccent</item>
+        <item name="hintTextColor">@color/colorAccent</item>
+    </style>
+
 
     <style name="BtnStyle" parent="@style/Widget.AppCompat.Button.Colored">
         <item name="android:stateListAnimator">@null</item>
@@ -24,11 +31,13 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 
-    <style name="Subhead" parent="@style/TextAppearance.AppCompat.Subhead"/>
-    <style name="Caption" parent="@style/TextAppearance.AppCompat.Caption"/>
+    <style name="Subhead" parent="@style/TextAppearance.AppCompat.Subhead" />
+
+    <style name="Caption" parent="@style/TextAppearance.AppCompat.Caption" />
 
 
     <style name="AppTheme.NoActionBar.ColorFulNavBars.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.NoActionBar.ColorFulNavBars.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="TextInputLayoutDark" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
@@ -52,9 +61,5 @@
         <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
-    <style name="RootElement">
-        <item name="android:focusable">true</item>
-        <item name="android:clickable">true</item>
-    </style>
 
 </resources>

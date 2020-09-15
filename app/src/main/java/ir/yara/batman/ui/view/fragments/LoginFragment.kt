@@ -11,18 +11,19 @@ import androidx.navigation.navGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import ir.yara.batman.BR
 import ir.yara.batman.R
-import ir.yara.batman.databinding.FragmentDetailBinding
+import ir.yara.batman.databinding.FragmentLoginBinding
 import ir.yara.batman.ui.base.BaseFragment
-import ir.yara.batman.ui.viewmodel.DetailVM
+import ir.yara.batman.ui.viewmodel.LoginVM
 import ir.yara.batman.utils.extensions.autoCleared
 
-@AndroidEntryPoint
-class DetailFragment() : BaseFragment() {
 
-    private val vm by navGraphViewModels<DetailVM>(R.id.nav_graph) {
+@AndroidEntryPoint
+class LoginFragment : BaseFragment() {
+
+    private val vm by navGraphViewModels<LoginVM>(R.id.nav_graph) {
         defaultViewModelProviderFactory
     }
-    private var binding by autoCleared<FragmentDetailBinding>()
+    private var binding by autoCleared<FragmentLoginBinding>()
 
 
     override fun onCreateView(
@@ -30,9 +31,9 @@ class DetailFragment() : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? =
-        DataBindingUtil.inflate<FragmentDetailBinding>(
+        DataBindingUtil.inflate<FragmentLoginBinding>(
             inflater,
-            R.layout.fragment_detail,
+            R.layout.fragment_login,
             container,
             false
         ).also {
@@ -43,11 +44,6 @@ class DetailFragment() : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.setVariable(BR.vm, vm)
-
-        arguments?.let {
-            vm.getImdbID(it.getString("imdbID")!!)
-        }
-        vm.getDetail()
 
     }
 
